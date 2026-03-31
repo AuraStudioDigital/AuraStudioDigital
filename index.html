@@ -133,7 +133,7 @@
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(calc(-50% - 10px)); }
         }
 
         .carousel-item {
@@ -328,6 +328,14 @@
             .carousel-item { width: 250px; height: 350px; }
             .final-cta h2 { font-size: 1.8rem; }
         }
+        
+        .carousel-track {
+            will-change: transform;
+        }
+        
+        .carousel-wtapper {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -460,7 +468,7 @@
             if (!track) return;
 
             // Criar itens do carrossel (duplicados para loop infinito)
-            const allImages = [...images, ...images];
+            const allImages = [...images, ...images, ...images];
             
             allImages.forEach((src, index) => {
                 const item = document.createElement('div');
