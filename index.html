@@ -339,6 +339,63 @@
         .carousel-wrapper {
             overflow: hidden;
         }
+
+        .quiz {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .quiz h2 {
+            margin-bottom: 30px;
+            color: #00BFFF;
+        }
+
+        .quiz-step button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(135deg, #00BFFF, #0077FF);
+            color: white;
+        }
+        .quiz-step {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .quiz-step button.active {
+            background: #FFB300;
+            transform: scale(1.05);
+        }
+        .progress-bar {
+            width: 100%;
+            max-width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progress {
+            height: 100%;
+            width: 33%;
+            background: #00BFFF;
+            transition: width 0.4s ease;
+        }
+
     </style>
 </head>
 <body>
@@ -354,6 +411,35 @@
                 </svg>
                 Quero Minhas Fotos Agora
             </a>
+        </div>
+    </section>
+
+    <section class="quiz">
+        <div class="container">
+            <h2>Escolha seu estilo 🎯</h2>
+
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>   
+
+            <div id="step1" class="quiz-step active">
+                <button onclick="selectStyle('Elegante',this)">Elegante</button>
+                <button onclick="selectStyle('Descontraído',this)">Descontraído</button>
+                <button onclick="selectStyle('Personalizado',this)">Personalizado</button>
+            </div>
+
+            <div id="step2" class="quiz-step active" >
+                <h3>Escolha seu pacote 💰</h3>
+                <button onclick="selectPackage('1 foto - R$9,90',this)">1 foto - R$9,90</button>
+                <button onclick="selectPackage('5 fotos - R$19,90',this)">5 fotos - R$19,90</button>
+                <button onclick="selectPackage('10 fotos - R$29,90',this)">10 fotos - R$29,90</button>
+            </div>
+
+            <div id="step3" class="quiz-step active" >
+                <a id="whatsappLink" class="cta-button" target="_blank">
+                    Finalizar no WhatsApp 🚀
+                </a>
+            </div>
         </div>
     </section>
 
@@ -497,6 +583,52 @@
                 }
             });
         });
+
+        let selectedStyle = '';
+        let selectedPackage = '';
+
+        function selectStyle(style, el) {
+            selectedStyle = style;
+            document.getElementById('progress').style.width = '66%';   
+            document.querySelectorAll('#step1 button').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+
+            setTimeout(() => {
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+            }, 300);
+        }
+        function selectPackage(pkg, el) {
+            selectedPackage = pkg;
+
+            document.getElementById('progress').style.width = '100%';
+
+            document.querySelectorAll('#step2 button').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+
+            setTimeout(() => {
+                document.getElementById('step2').classList.remove('active');
+                document.getElementById('step3').classList.add('active');
+                generateWhatsAppLink();
+            }, 300);
+        }
+        function generateWhatsAppLink() {
+            const message = 
+        `Olá! Vim pelo site 
+
+        Quero fazer o meu ensaio de aniversário.
+
+        - Estilo: ${selectedStyle}
+        - Pacote: ${selectedPackage}
+
+        Gostaria de fechar agora!`;
+
+            const encodedMessage = encodeURIComponent(message);
+
+            const link = `https://wa.me/31987905473?text=${encodedMessage}`;
+
+            document.getElementById('whatsappLink').href = link;
+        }
     </script>
 
 </body>
