@@ -442,6 +442,14 @@
             display: block;
         }
 
+        @supports (-webkit-touch-callout: none) {
+            .carousel-track {
+                overflow-x: auto;
+                animation: none;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
     </style>
 </head>
 <body>
