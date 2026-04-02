@@ -28,12 +28,13 @@
         /* HERO SECTION */
         .hero {
             text-align: center;
-            padding: 100px 20px 60px;
+            padding: 60px 20px 30px;
             background: linear-gradient(180deg, #000000 0%, #111111 100%);
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
+            line-height: 1.2;
             margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: -1px;
@@ -78,7 +79,7 @@
 
         /* SERVIÇOS COM CARROSSEL */
         .service-section {
-            padding: 40px 20px 80px;
+            padding: 10px 20px 60px;
             position: relative;
         }
 
@@ -120,7 +121,7 @@
             display: flex;
             gap: 20px;
             width: max-content;
-            animation: scroll 25s linear infinite;
+            animation: scroll 18s linear infinite;
         }
 
         .carousel-track:hover {
@@ -341,7 +342,7 @@
         }
 
         .quiz {
-            padding: 60px 20px;
+            padding: 40px 20px 10px;
             text-align: center;
         }
 
@@ -396,6 +397,40 @@
             transition: width 0.4s ease;
         }
 
+        .quiz input {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .quiz-step button:active {
+            transform: scale(0.97);
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .service-content {
+            margin-top: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -405,43 +440,57 @@
         <div class="container">
             <h1>Transforme Suas Selfies em Fotos Incríveis de Aniversário!</h1>
             <p class="subtitle">Sem fotógrafo, sem estúdio. Apenas Tecnologia de Ponta e suas melhores fotos prontas em menos de 24 Horas.</p>
-            <a href="https://wa.me/31987905473?text=Olá!%20Vim%20pelo%20seu%20site%20e%20quero%20realizar%20meu%20ensaio%20de%20Aniversário.%0A%0AQual%20é%20o%20melhor%20pacote%20disponível%20no%20momento%3F%20Tenho%20interesse%20em%20fechar%20ainda%20hoje." class="cta-button" target="_blank">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-                Quero Minhas Fotos Agora
-            </a>
+            <div class="quiz">
+
+                <div class="progress-bar">
+                    <div id="progress"></div>
+                </div>
+
+                <!-- NOME -->
+                <div id="step0" class="quiz-step active">
+                    <h3>Qual seu nome?</h3>
+                    <input type="text" id="clientName" placeholder="Digite seu nome...">
+                    <button onclick="goToAge()">Continuar</button>
+                </div>
+
+                <!-- IDADE -->
+                <div id="stepAge" class="quiz-step">
+                    <h3>Qual idade vamos comemorar?</h3>
+                    <input type="number" id="clientAge" placeholder="Ex: 25">
+                    <button onclick="startQuiz()">Continuar</button>
+                </div>
+
+                <!-- ESTILO -->
+                <div id="step1" class="quiz-step">
+                    <h3>Escolha seu estilo</h3>
+                    <button onclick="selectStyle('Elegante',this)">Elegante</button>
+                    <button onclick="selectStyle('Descontraído',this)">Descontraído</button>
+                    <button onclick="selectStyle('Personalizado',this)">Personalizado</button>
+                </div>
+
+                <!-- PACOTE -->
+                <div id="step2" class="quiz-step">
+                    <h3>Escolha seu pacote</h3>
+                    <button onclick="selectPackage('1 foto - R$9,90',this)">1 foto - R$9,90</button>
+                    <button onclick="selectPackage('5 fotos - R$19,90',this)">5 fotos - R$19,90</button>
+                    <button onclick="selectPackage('10 fotos - R$29,90',this)">10 fotos - R$29,90</button>
+                </div>
+
+                <!-- FINAL -->
+                <div id="step3" class="quiz-step">
+                    <a id="whatsappLink" class="cta-button" target="_blank">
+                        Quero minhas fotos agora
+                    </a>
+                </div>
+                <p style="margin-top:20px; color:#00BFFF;">
+                +100 clientes já transformaram suas fotos 🔥
+                </p>
+
+            </div>
         </div>
     </section>
 
-    <section class="quiz">
-        <div class="container">
-            <h2>Escolha seu estilo 🎯</h2>
-
-            <div class="progress-bar">
-                <div id="progress"></div>
-            </div>   
-
-            <div id="step1" class="quiz-step active">
-                <button onclick="selectStyle('Elegante',this)">Elegante</button>
-                <button onclick="selectStyle('Descontraído',this)">Descontraído</button>
-                <button onclick="selectStyle('Personalizado',this)">Personalizado</button>
-            </div>
-
-            <div id="step2" class="quiz-step active" >
-                <h3>Escolha seu pacote 💰</h3>
-                <button onclick="selectPackage('1 foto - R$9,90',this)">1 foto - R$9,90</button>
-                <button onclick="selectPackage('5 fotos - R$19,90',this)">5 fotos - R$19,90</button>
-                <button onclick="selectPackage('10 fotos - R$29,90',this)">10 fotos - R$29,90</button>
-            </div>
-
-            <div id="step3" class="quiz-step active" >
-                <a id="whatsappLink" class="cta-button" target="_blank">
-                    Finalizar no WhatsApp 🚀
-                </a>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- ANIVERSÁRIO + CARROSSEL -->
     <section class="service-section">
@@ -522,14 +571,18 @@
         // Configuração dos carrosséis com imagens de exemplo
         const carousels = {
             aniversario: [
-                'Imagem1.png',
+                //'Imagem1.png',
                 '1.png',
                 '2.png',
+                '3.png',
+                '4.png',
                 '5.png',
+                '6.png',
+                '7.png',
                 '8.png',
                 '9.png',
-                '10.png',
-                '3.png'
+                '10.png'
+
             ],
            // profissional: [
            //     'E1.png',
@@ -539,7 +592,8 @@
            //     'E5.png',
            //     'E6.png',
            //     'E7.png',
-           //     'E8.png'
+           //     'E8.png',
+
            // ],
            // viagem: [
            //     'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&h=600&fit=crop',
@@ -587,9 +641,58 @@
         let selectedStyle = '';
         let selectedPackage = '';
 
+        let clientName = '';
+        let clientAge = '';
+
+        function goToAge() {
+            window.scrollTo({
+                top: document.querySelector('.quiz').offsetTop,
+                behavior: 'smooth'
+            });
+
+            const name = document.getElementById('clientName').value;
+
+            if (!name) {
+                alert('Digite seu nome 😉');
+                return;
+            }
+
+            clientName = name;
+
+            document.getElementById('progress').style.width = '25%';
+
+            document.getElementById('step0').classList.remove('active');
+            document.getElementById('stepAge').classList.add('active');
+        }
+
+        function startQuiz() {
+            window.scrollTo({
+                top: document.querySelector('.quiz').offsetTop,
+                behavior: 'smooth'
+            });
+
+            const age = document.getElementById('clientAge').value;
+
+            if (!age) {
+                alert('Digite sua idade 😉');
+                return;
+            }
+
+            clientAge = age;
+
+            document.getElementById('progress').style.width = '50%';
+
+            document.getElementById('stepAge').classList.remove('active');
+            document.getElementById('step1').classList.add('active');
+        }
+
         function selectStyle(style, el) {
+                window.scrollTo({
+                top: document.querySelector('.quiz').offsetTop,
+                behavior: 'smooth'
+            });
             selectedStyle = style;
-            document.getElementById('progress').style.width = '66%';   
+            document.getElementById('progress').style.width = '75%';   
             document.querySelectorAll('#step1 button').forEach(btn => btn.classList.remove('active'));
             el.classList.add('active');
 
@@ -599,6 +702,10 @@
             }, 300);
         }
         function selectPackage(pkg, el) {
+                window.scrollTo({
+                top: document.querySelector('.quiz').offsetTop,
+                behavior: 'smooth'
+            });
             selectedPackage = pkg;
 
             document.getElementById('progress').style.width = '100%';
@@ -613,23 +720,46 @@
             }, 300);
         }
         function generateWhatsAppLink() {
+                window.scrollTo({
+                top: document.querySelector('.quiz').offsetTop,
+                behavior: 'smooth'
+            });
+
+            let extraMessage = "";
+
+            if (selectedPackage.includes("1 foto")) {
+                extraMessage = "\nEscolhi o pacote básico, queria entender melhor os outros.";
+            }
+
+            if (selectedPackage.includes("5 fotos")) {
+                extraMessage = "\nFiquei na dúvida entre esse e o de 10 fotos.";
+            }
+
+            if (selectedPackage.includes("10 fotos")) {
+                extraMessage = "\nQuero já garantir o pacote completo.";
+            }
+
             const message = 
-        `Olá! Vim pelo site 
+        "Olá! Me chamo " + clientName + " e tenho " + clientAge + " anos.\n\n" +
 
-        Quero fazer o meu ensaio de aniversário.
+        "Quero fazer meu ensaio de aniversário.\n\n" +
 
-        - Estilo: ${selectedStyle}
-        - Pacote: ${selectedPackage}
+        "*Estilo:* " + selectedStyle + "\n" +
+        "*Pacote:* " + selectedPackage + "\n" +
 
-        Gostaria de fechar agora!`;
+        extraMessage + "\n\n" +
+
+        "Pode me atender?";
 
             const encodedMessage = encodeURIComponent(message);
-
-            const link = `https://wa.me/31987905473?text=${encodedMessage}`;
+            const link = "https://wa.me/31987905473?text=" + encodedMessage;
 
             document.getElementById('whatsappLink').href = link;
         }
     </script>
+        <a href="https://wa.me/31987905473" class="floating-whatsapp" target="_blank">
+        💬
+    </a>
 
 </body>
 </html>
