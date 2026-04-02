@@ -122,6 +122,10 @@
             gap: 20px;
             width: max-content;
             animation: scroll 18s linear infinite;
+
+            transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+                backface-visibility: hidden;
         }
 
         .carousel-track:hover {
@@ -431,6 +435,13 @@
             margin-top: 0;
         }
 
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -615,7 +626,7 @@
             allImages.forEach((src, index) => {
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
-                item.innerHTML = `<img src="${src}" alt="Foto ${index + 1}" loading="lazy">`;
+                item.innerHTML = `<img src="${src}" alt="Foto ${index + 1}">`;
                 track.appendChild(item);
             });
         }
