@@ -733,7 +733,6 @@
             }, 300);
         }
         function selectPackage(pkg, el) {
-            fbq('track', 'Lead' );
                 window.scrollTo({
                 top: document.querySelector('.quiz').offsetTop,
                 behavior: 'smooth'
@@ -789,13 +788,9 @@
             document.getElementById('whatsappLink').href = link;
         }
         function handleClick(e) {
-            e.preventDefault();
-
-            fbq('track', 'Lead');
-
-            setTimeout(() => {
-                window.open(e.currentTarget.href, '_blank');
-            }, 500);
+            if (typeof fbq === 'function') {
+                fbq('track', 'Lead');
+            }
         }
     </script>
         <a href="https://wa.me/31987905473" class="floating-whatsapp" target="_blank" onclick="handleClick(event)">
